@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import ReactStars from 'react-stars'
 const Cards = () => {
     const [data,Setdata]=useState([
         {
@@ -60,7 +60,7 @@ const Cards = () => {
     ])
     return (
         <>
-        <div> <h1 className='text-center mt-3 font-bold font-serif'>Download all Movies for free in Easy Way!</h1> </div>
+        <div> <h1 className='text-center mt-3 font-bold font-serif'>Download all Movies for free Instantly!</h1> </div>
             <div className='flex flex-wrap justify-between p-3 mt-4   '>
                 
                 {data.map((e,i)=>{  
@@ -72,7 +72,14 @@ const Cards = () => {
                     hover:border-white-200 ' src={e.img}
                         alt="img" />
                     <h1 >Name:- <span className='truncate text-sm'>{e.name}</span></h1>
-                    <h1>Rating:- <span>{e.Rating}</span></h1>
+                    <h1>Rating:- <span>{e.Rating}</span>
+                    <ReactStars
+                    size={20}
+                    count={5}
+                    value={4.5}
+                    edit={false}
+                    half={true}/>
+                    </h1>
                     <h1>Year:- <span>{e.Year}</span></h1>
                 </div>
                     )   
