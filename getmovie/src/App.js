@@ -1,8 +1,11 @@
+import Cards from "./Component/Cards";
+import Header from "./Component/Header";
 
 function App() {
   return (
-    <div className="App">
-      getMovie
+    <div>
+      <Header/>
+      <Cards/>
     </div>
   );
 }
