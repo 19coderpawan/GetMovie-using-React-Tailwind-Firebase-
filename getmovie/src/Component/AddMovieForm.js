@@ -1,4 +1,8 @@
 import React, { useState } from 'react'
+import {TailSpin} from 'react-loader-spinner'
+import { addDoc } from 'firebase/firestore'
+import { Movieref } from '../Firebase'
+import swal from 'sweetalert';
 
 const AddMovieForm = () => {
     const [formdata ,setformdata]=useState({
@@ -8,6 +12,29 @@ const AddMovieForm = () => {
         Description:"",
         img:""
     })
+    const [loading ,Setloading]=useState(false);
+
+    const Addmovie=async()=>{
+      Setloading(true);
+      try {
+        await addDoc(Movieref,formdata);
+        swal({
+          title:"Successfully Added the Item",
+          icon:"success",
+          buttons:false,
+          timer:3000
+        })
+      } catch (error) {
+        swal({
+          title:error,
+          icon:"error",
+          buttons:false,
+          timer:3000
+        })
+      }
+      setformdata({name:"",Year:"",Rating:"",Description:"",img:""})
+      Setloading(false);
+    }
   return (
     <>
       <section class="text-gray-600 body-font relative overflow-hidden">
@@ -55,7 +82,9 @@ const AddMovieForm = () => {
           </div>
         </div>
         <div class="p-2 w-full">
-          <button class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Add</button>
+          <button onClick={Addmovie} class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+            {loading ?<TailSpin height={30} color='red' width={70}/> :"Add"}
+            </button>
         </div>
         
       </div>
