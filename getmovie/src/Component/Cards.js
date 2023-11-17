@@ -10,7 +10,7 @@ const Cards = () => {
         Setloading(true);
         const fetcheddata=await getDocs(Movieref);
          fetcheddata.forEach(doc => {
-            Setdata((pre)=>[...pre,doc.data()]);
+            Setdata((pre)=>[...pre,{...doc.data(),id:doc.id}]);
          });
          Setloading(false)
        }
