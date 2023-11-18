@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom'
 import { db } from '../Firebase'
 import { getDoc,doc } from 'firebase/firestore'
 import { ThreeCircles } from 'react-loader-spinner'
+import Review from './Review'
 const DetailPage = () => {
     const{id}=useParams();
     const [data,Setdata]=useState({
@@ -42,8 +43,8 @@ const DetailPage = () => {
             value={data.Rating}
             edit={false}
             half={true} />
-            <p>{data.Description}</p>
-            
+            <p>{data.Description}</p> 
+            <Review/>
         </div>
       </div>
 }
