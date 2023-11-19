@@ -1,18 +1,38 @@
 import React, { useState } from 'react'
 import ReactStars from 'react-stars'
+import { setDoc,doc } from 'firebase/firestore'
+import {  Reviewref } from '../Firebase'
+import { useParams } from 'react-router-dom'
+
 
 const Review = () => {
+  const {id}=useParams();
     const[reviewdata,Setreviewdata]=useState({
         review:"",
-        reviewrating:""
+        reviewrating:"",
+        Movieid:id,
+        name:""
     })
+   
+    const Share=async()=>{
+      await setDoc(doc(Reviewref),reviewdata)
+    }
   return (
     <>
       <div className='mt-6 w-full'>
+        <h1 className='text-center mb-1 font-bold'>Share Your Review</h1>
+        
+        <input
+         type='text'
+         placeholder='Enter Your Name....'
+         className='w-full  p-2 outline-none '
+         style={{backgroundColor:'#454545'}}
+         onChange={(e)=>Setreviewdata({...reviewdata,name:e.target.value})}
+        />
         <input
          type='text'
          placeholder='Share Your Thoughts....'
-         className='w-full p-2 outline-none '
+         className='w-full p-2 mt-2 outline-none '
          style={{backgroundColor:'#454545'}}
          onChange={(e)=>Setreviewdata({...reviewdata,review:e.target.value})}
         />
@@ -26,7 +46,7 @@ const Review = () => {
          onChange={(e)=>Setreviewdata({...reviewdata,reviewrating:e})}
         />
         </div>
-        <button className='w-full mt-2 p-2 bg-green-600 font-bold font-serif hover:border-2
+        <button onClick={Share} className='w-full mt-2 p-2 bg-green-600 font-bold font-serif hover:border-2
          border-blue-500 hover:bg-white hover:text-green-600'>Share</button>
       </div>
     </>
