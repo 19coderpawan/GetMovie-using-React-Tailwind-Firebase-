@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import {collection, getFireStore} from "firebase/firestore"
+import {collection, getFirestore} from "firebase/firestore"
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -15,6 +15,8 @@ const firebaseConfig = {
 // Initialize Firebase
  export const app = initializeApp(firebaseConfig);
 //  Initialize FireStore
- export const db=getFireStore(app)
+ export const db=getFirestore(app)
 //  Also you can create the ref to your collection here :-
  export const Movieref=collection(db,"movie")
+//  ref of the Moviereview
+export const Reviewref=collection(db,"Moviereview")
