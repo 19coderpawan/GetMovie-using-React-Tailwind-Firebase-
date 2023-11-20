@@ -12,7 +12,8 @@ const Review = () => {
         review:"",
         reviewrating:"",
         Movieid:id,
-        name:""
+        name:"",
+        timestamp:new Date().getTime()
     })
    const [loading , Setloading]=useState(false);
     const Share=async()=>{
