@@ -3,7 +3,8 @@ import ReactStars from 'react-stars'
 import { setDoc,doc } from 'firebase/firestore'
 import {  Reviewref } from '../Firebase'
 import { useParams } from 'react-router-dom'
-
+import { ThreeCircles } from 'react-loader-spinner'
+import swal from 'sweetalert'
 
 const Review = () => {
   const {id}=useParams();
@@ -13,9 +14,39 @@ const Review = () => {
         Movieid:id,
         name:""
     })
-   
+   const [loading , Setloading]=useState(false);
     const Share=async()=>{
-      await setDoc(doc(Reviewref),reviewdata)
+      if(!reviewdata.review || !reviewdata.reviewrating || !reviewdata.Movieid || !reviewdata.name){
+         swal({
+          title:"Fill All Details to Share Your Review",
+          icon:'error',
+          buttons:false,
+          timer:1000
+         })
+         return;
+      }
+      Setloading(true);
+      try {
+        await setDoc(doc(Reviewref),reviewdata)
+        swal({
+          title:"Thank You for sharing",
+          icon:'success',
+          button:false,
+          timer:1000
+        })
+      } catch (error) {
+        swal({
+          title:error,
+          icon:'error',
+          buttons:false,
+          timer:1000
+        })
+      }
+      Setreviewdata({review:"",
+      reviewrating:"",
+      Movieid:id,
+      name:""})
+      Setloading(false)
     }
   return (
     <>
@@ -26,6 +57,7 @@ const Review = () => {
          type='text'
          placeholder='Enter Your Name....'
          className='w-full  p-2 outline-none '
+         value={reviewdata.name}
          style={{backgroundColor:'#454545'}}
          onChange={(e)=>Setreviewdata({...reviewdata,name:e.target.value})}
         />
@@ -34,6 +66,7 @@ const Review = () => {
          placeholder='Share Your Thoughts....'
          className='w-full p-2 mt-2 outline-none '
          style={{backgroundColor:'#454545'}}
+         value={reviewdata.review}
          onChange={(e)=>Setreviewdata({...reviewdata,review:e.target.value})}
         />
         <div className='flex flex-row justify-center items-center gap-3'>
@@ -47,7 +80,9 @@ const Review = () => {
         />
         </div>
         <button onClick={Share} className='w-full mt-2 p-2 bg-green-600 font-bold font-serif hover:border-2
-         border-blue-500 hover:bg-white hover:text-green-600'>Share</button>
+         border-blue-500 hover:bg-white hover:text-green-600'>
+          {loading ?<div className='flex justify-center'><ThreeCircles height={30} color='red'/></div>  :"Share"}
+          </button>
       </div>
     </>
   )
