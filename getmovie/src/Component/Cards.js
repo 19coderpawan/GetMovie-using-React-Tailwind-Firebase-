@@ -29,7 +29,7 @@ const Cards = () => {
                  <div key={i} className='bg-slate-900 font-bold p-3  transition-all duration-700 border-2
                 rounded-xl m-3 
                 hover:-translate-y-4 mt-9'>
-                            <img className=' h-70 w-60  mt-1 cursor-pointer rounded-xl hover:border-2 
+                            <img className=' h-60 w-60  mt-1 cursor-pointer rounded-xl hover:border-2 
                     hover:border-white-200 ' src={e.img}
                                 alt="img" />
                             <h1 >Name:- <span className='truncate text-sm'>{e.name}</span></h1>
@@ -37,7 +37,7 @@ const Cards = () => {
                                 <ReactStars
                                     size={20}
                                     count={5}
-                                    value={e.Rating}
+                                    value={e.Rated===0?e.Rating:e.totalrating/e.Rated}
                                     edit={false}
                                     half={true} />
                             </h1>
