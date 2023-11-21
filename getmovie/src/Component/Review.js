@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import ReactStars from 'react-stars'
-import { setDoc,doc } from 'firebase/firestore'
-import {  Reviewref } from '../Firebase'
+import { setDoc,doc,updateDoc } from 'firebase/firestore'
+import {  Reviewref,Movieref } from '../Firebase'
 import { useParams } from 'react-router-dom'
 import { ThreeCircles } from 'react-loader-spinner'
 import swal from 'sweetalert'
 
-const Review = () => {
+const Review = ({prevrating,Rated}) => {
   const {id}=useParams();
     const[reviewdata,Setreviewdata]=useState({
         review:"",
@@ -34,6 +34,11 @@ const Review = () => {
           icon:'success',
           button:false,
           timer:1000
+        })
+        const updateref=doc(Movieref,id);
+        await updateDoc(updateref,{
+          totalrating:prevrating+reviewdata.reviewrating,
+          Rated:Rated+1
         })
       } catch (error) {
         swal({
@@ -77,6 +82,7 @@ const Review = () => {
          edit={true}
          size={25}
          half={true}
+         value={reviewdata.reviewrating}
          onChange={(e)=>Setreviewdata({...reviewdata,reviewrating:e})}
         />
         </div>
