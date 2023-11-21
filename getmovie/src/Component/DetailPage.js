@@ -13,15 +13,16 @@ const DetailPage = () => {
     const [data,Setdata]=useState({
         name:"",
         Year:"",
-        Rating:"",
+        Rating:0,
         Description:"",
-        img:""
+        img:"",
+        Rated:0
     });
     const [loading,Setloading]=useState(false);
     useEffect(()=>{
       async function getdata(){
         Setloading(true);
-        const fetcheddata=await doc(db,"movie",id);
+        const fetcheddata= doc(db,"movie",id);
         const displayfetchdata= await getDoc(fetcheddata);
         Setdata(displayfetchdata.data());
         Setloading(false);
@@ -40,11 +41,11 @@ const DetailPage = () => {
             <ReactStars
             size={25}
             count={5}
-            value={data.Rating}
+            value={data.Rated===0?data.Rating:data.totalrating/data.Rated}
             edit={false}
             half={true} />
             <p>{data.Description}</p> 
-            <Review/>
+            <Review prevrating={data.Rating} Rated={data.Rated}/>
         </div>
       </div>
 }
