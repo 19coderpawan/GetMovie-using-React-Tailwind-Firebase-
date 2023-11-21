@@ -11,7 +11,9 @@ const AddMovieForm = () => {
         Year:"",
         Rating:"",
         Description:"",
-        img:""
+        img:"",
+        totalrating:0,
+        Rated:0
     })
     const navigate=useNavigate();
     const [loading ,Setloading]=useState(false);
@@ -49,7 +51,6 @@ const AddMovieForm = () => {
     }
   return (
     <>
-    
 
       <section class="text-gray-600 body-font relative overflow-hidden">
   <div class="container px-5 py-24 mx-auto">
@@ -105,7 +106,6 @@ const AddMovieForm = () => {
     </div>
   </div>
 </section>
-    
     </>
   )
 }
