@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactStars from 'react-stars'
-import { setDoc,doc,updateDoc } from 'firebase/firestore'
+import { setDoc,doc,updateDoc,query,where,getDocs } from 'firebase/firestore'
 import {  Reviewref,Movieref } from '../Firebase'
 import { useParams } from 'react-router-dom'
 import { ThreeCircles } from 'react-loader-spinner'
@@ -15,6 +15,7 @@ const Review = ({prevrating,Rated}) => {
         name:"",
         timestamp:new Date().getTime()
     })
+    const[FetchedReview,SetfetchedReview]=useState([]);
    const [loading , Setloading]=useState(false);
     const Share=async()=>{
       if(!reviewdata.review || !reviewdata.reviewrating || !reviewdata.Movieid || !reviewdata.name){
@@ -54,6 +55,17 @@ const Review = ({prevrating,Rated}) => {
       name:""})
       Setloading(false)
     }
+
+    // lets retrive the review data of the specified movie using their id's.
+    useEffect(()=>{
+      async function getreviewdata(){
+        const q=query(Reviewref,where("Movieid","==",id));
+        const querySnapshot= await getDocs(q);
+        querySnapshot.forEach((doc)=>{
+          SetfetchedReview((prev)=>[...prev,doc.data()]);
+        })
+      }
+    })
   return (
     <>
       <div className='mt-6 w-full'>
@@ -90,6 +102,9 @@ const Review = ({prevrating,Rated}) => {
          border-blue-500 hover:bg-white hover:text-green-600'>
           {loading ?<div className='flex justify-center'><ThreeCircles height={30} color='red'/></div>  :"Share"}
           </button>
+      </div>
+      <div>
+        <h1></h1>
       </div>
     </>
   )
