@@ -65,7 +65,9 @@ const Review = ({prevrating,Rated}) => {
           SetfetchedReview((prev)=>[...prev,doc.data()]);
         })
       }
-    })
+
+      getreviewdata();
+    },[])
   return (
     <>
       <div className='mt-6 w-full'>
@@ -104,7 +106,16 @@ const Review = ({prevrating,Rated}) => {
           </button>
       </div>
       <div>
-        <h1></h1>
+        <h1>Your Reviews</h1>
+        <div>
+          {FetchedReview.map((e,i)=>{
+            return(
+              <div key={i}>
+                <p>{e.review}</p>
+              </div>
+            )
+          })}
+        </div>
       </div>
     </>
   )
