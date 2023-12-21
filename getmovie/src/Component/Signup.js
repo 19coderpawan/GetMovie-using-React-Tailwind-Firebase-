@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Auth } from '../Firebase'
+import { Auth, Usersref } from '../Firebase'
 import { TailSpin } from 'react-loader-spinner'
 import swal from 'sweetalert'
 import { createUserWithEmailAndPassword } from 'firebase/auth';
@@ -29,14 +29,19 @@ const Signup = () => {
 
      try {
         SetLoading(true);
-        await createUserWithEmailAndPassword(Auth,Signupdata.email,Signupdata.password);
+         const response = await createUserWithEmailAndPassword(Auth,Signupdata.email,Signupdata.password);
+         console.log( response);
         swal({
             title:"Your are Registered Thank you for Joining Us!",
             icon:"success",
             buttons:false,
             timer:2000
         })
-
+        await addDoc(Usersref,{
+            name:Signupdata.name,
+            email:Signupdata.email,
+            userId:response.user.uid
+        })
      } catch (error) {
          SetLoading(false);
          swal({
