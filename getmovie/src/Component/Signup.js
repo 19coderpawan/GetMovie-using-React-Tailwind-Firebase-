@@ -4,7 +4,8 @@ import { Auth } from '../Firebase'
 import { TailSpin } from 'react-loader-spinner'
 import swal from 'sweetalert'
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-
+import { useNavigate } from 'react-router-dom'
+import { addDoc } from 'firebase/firestore'
 
 const Signup = () => {
    const [Signupdata,SetSignupdata]=useState({
@@ -13,7 +14,7 @@ const Signup = () => {
     password:""
    })
    const [Loading,SetLoading]=useState(false);
-
+   const navigation=useNavigate();
    const handleSubmit=async(e)=>{
      e.preventDefault();
      if(!Signupdata.name || !Signupdata.email || !Signupdata.password){
@@ -47,6 +48,7 @@ const Signup = () => {
      }
      SetLoading(false);
      SetSignupdata({...Signupdata,name:"",email:"",password:""})
+     navigation('/login');
    }
 
     return (
