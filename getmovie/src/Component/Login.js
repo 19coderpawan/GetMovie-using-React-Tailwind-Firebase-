@@ -4,13 +4,17 @@ import swal from 'sweetalert'
 import { TailSpin } from 'react-loader-spinner'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { Auth } from '../Firebase'
-
+import { useNavigate } from 'react-router-dom'
+import { Appstate } from '../App'
+import { useContext } from 'react'
 const Login = () => {
 
     const [logindata,Setlogindata]=useState({
         email:'',
         password:''
     })
+    const {Setlogin}=useContext(Appstate);
+    const navigation=useNavigate();
     const[Loading,SetLoading]=useState(false);
     const handleLoginSubmit=async(e)=>{
         e.preventDefault();
@@ -36,6 +40,8 @@ const Login = () => {
         }
         Setlogindata({...Setlogindata,email:"",password:""});
         SetLoading(false);
+        navigation('/');
+        Setlogin(true);
     }
 
     return (
