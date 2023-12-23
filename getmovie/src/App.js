@@ -12,7 +12,7 @@ function App() {
   const [login,Setlogin]=useState(false);
 
   return (
-    <Appstate.Provider value={(login, Setlogin)}>
+    <Appstate.Provider value={{login, Setlogin}}>
     <div>
       <Header/>
       <Routes>
