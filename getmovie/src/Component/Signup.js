@@ -6,6 +6,7 @@ import swal from 'sweetalert'
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom'
 import { addDoc } from 'firebase/firestore'
+import bcrypt from "bcryptjs-react"
 
 const Signup = () => {
    const [Signupdata,SetSignupdata]=useState({
@@ -31,17 +32,23 @@ const Signup = () => {
         SetLoading(true);
          const response = await createUserWithEmailAndPassword(Auth,Signupdata.email,Signupdata.password);
          console.log( response);
+        //  in order to hash the password using bcrypt we need to first gen salt (which deterimne now strong your password will be but it will make it slower to generate).
+         const salt= bcrypt.genSaltSync(10);
+         const hash = bcrypt.hashSync(Signupdata.password, salt);
+        console.log(hash);
+        await addDoc(Usersref,{
+            name:Signupdata.name,
+            email:Signupdata.email,
+            password:hash,
+            userId:response.user.uid
+        })
         swal({
-            title:"Your are Registered Thank you for Joining Us!",
+            title:"Your are Registered. Thank you for Joining Us!",
             icon:"success",
             buttons:false,
             timer:2000
         })
-        await addDoc(Usersref,{
-            name:Signupdata.name,
-            email:Signupdata.email,
-            userId:response.user.uid
-        })
+        
      } catch (error) {
          SetLoading(false);
          swal({
@@ -77,7 +84,8 @@ const Signup = () => {
                             </div>
                             <div>
                                 <label for="password" class="block mb-2 text-sm font-medium text-white-900 ">Password</label>
-                                <input type="password" value={Signupdata.password} name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                                <input type={'password'} value={Signupdata.password} name="password" id="password" 
+                                 placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
                                 onChange={(e)=>{SetSignupdata({...Signupdata,password:e.target.value})}} required="" />
                             </div>
                             
