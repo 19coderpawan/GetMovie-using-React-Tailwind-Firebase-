@@ -106,6 +106,9 @@ const Review = ({ prevrating, Rated }) => {
          border-blue-500 hover:bg-white hover:text-green-600'>
           {loading ? <div className='flex justify-center'><ThreeCircles height={30} color='red' /></div> : "Share"}
         </button>
+        <div className='flex justify-center items-center'>
+        <button className=' w-half text-center mt-4  p-2 bg-green-600 font-bold font-serif '>Download</button>
+        </div>
       </div>
       <div>
         <h1 className='text-center mt-5 border-t-2 font-bold'>Your Reviews</h1>
@@ -125,6 +128,7 @@ const Review = ({ prevrating, Rated }) => {
                     className='mt-0.5'
                   />
                   </div>
+                  <p>{new Date(e.timestamp).toLocaleString()}</p>
                   <p className='font-serif'>{e.review}</p>
                 </div>
               </div>
