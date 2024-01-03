@@ -12,6 +12,7 @@ const AddMovieForm = () => {
         Rating:"",
         Description:"",
         img:"",
+        DownloadLink:"",
         totalrating:0,
         Rated:0
     })
@@ -87,6 +88,13 @@ const AddMovieForm = () => {
             <label for="text" class="leading-7 text-sm text-white font-bold font-serif ">Image Link</label>
             <input  type="text" id="text" name="text" value={formdata.img} class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
             onChange={(e)=>setformdata({...formdata,img:e.target.value})} required/>
+          </div>
+        </div>
+        <div class="p-2 w-full">
+          <div class="relative">
+            <label for="text" class="leading-7 text-sm text-white font-bold font-serif animate-pulse ">Download Link</label>
+            <input  type="text" id="text" name="text" value={formdata.DownloadLink} class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+            onChange={(e)=>setformdata({...formdata,DownloadLink:e.target.value})} required/>
           </div>
         </div>
         <div class="p-2 w-full">
