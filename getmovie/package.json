@@ -6,7 +6,11 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "bcryptjs": "^2.4.3",
+    "bcryptjs-react": "^2.4.6",
     "firebase": "^10.6.0",
+    "i": "^0.3.7",
+    "npm": "^10.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-loader-spinner": "^5.4.5",
@@ -14,6 +18,7 @@
     "react-scripts": "5.0.1",
     "react-stars": "^2.2.5",
     "sweetalert": "^2.1.2",
+    "tw-elements-react": "^1.0.0-alpha2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -46,3 +51,4 @@
     "tailwindcss": "^3.3.5"
   }
 }
+
