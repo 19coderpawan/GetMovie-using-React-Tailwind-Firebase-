@@ -69,7 +69,7 @@ const Review = ({ prevrating, Rated }) => {
     }
 
     getreviewdata();
-  }, [])
+  }, [id])
   return (
     <>
       <div className='mt-6 w-full'>
@@ -141,3 +141,4 @@ const Review = ({ prevrating, Rated }) => {
 }
 
 export default Review
+
