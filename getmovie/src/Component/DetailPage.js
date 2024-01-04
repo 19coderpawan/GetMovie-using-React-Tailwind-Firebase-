@@ -30,12 +30,12 @@ const DetailPage = () => {
       
       getdata();
       
-    },[])
+    },[id])
   return (
     <>
     {loading?<div className=' w-full flex justify-center items-center '><ThreeCircles/></div>:
       <div className='flex flex-col md:flex-row md:items-start items-center w-full justify-center mt-4 p-3'>
-        <img className='h-96 md:w-80  md:sticky top-4' src={data.img}/>
+        <img className='h-96 md:w-80  md:sticky top-4' src={data.img} alt='Wait'/>
         <div className='ml-3 w-full  md:w-1/2'>
             <h1 className='text-3xl font-bold text-gray-400'>{data.name} <span className='text-xl'>({data.Year})</span></h1>
             <ReactStars
