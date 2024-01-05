@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 import { ThreeCircles } from 'react-loader-spinner'
 import swal from 'sweetalert'
 
-const Review = ({ prevrating, Rated }) => {
+const Review = ({ prevrating, Rated,DownLink }) => {
   const { id } = useParams();
   const [reviewdata, Setreviewdata] = useState({
     review: "",
@@ -107,7 +107,9 @@ const Review = ({ prevrating, Rated }) => {
           {loading ? <div className='flex justify-center'><ThreeCircles height={30} color='red' /></div> : "Share"}
         </button>
         <div className='flex justify-center items-center'>
+          <a href={DownLink}>
         <button className=' w-half text-center mt-4  p-2 bg-green-600 font-bold font-serif '>Download</button>
+          </a>
         </div>
       </div>
       <div>
@@ -141,4 +143,3 @@ const Review = ({ prevrating, Rated }) => {
 }
 
 export default Review
-
