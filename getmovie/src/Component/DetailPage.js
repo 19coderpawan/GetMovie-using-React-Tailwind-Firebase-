@@ -15,11 +15,13 @@ const DetailPage = () => {
         Year:"",
         Rating:0,
         Description:"",
+        DownloadLink:"",
         img:"",
         Rated:0
     });
     const [loading,Setloading]=useState(false);
     useEffect(()=>{
+      
       async function getdata(){
         Setloading(true);
         const fetcheddata= doc(db,"movie",id);
@@ -29,8 +31,8 @@ const DetailPage = () => {
       }
       
       getdata();
-      
     },[id])
+    // console.log("here is my Download Link"+data.DownloadLink)
   return (
     <>
     {loading?<div className=' w-full flex justify-center items-center '><ThreeCircles/></div>:
@@ -45,7 +47,7 @@ const DetailPage = () => {
             edit={false}
             half={true} />
             <p>{data.Description}</p> 
-            <Review prevrating={data.Rating} Rated={data.Rated}/>
+            <Review prevrating={data.Rating} Rated={data.Rated} DownLink={data.DownloadLink} />
         </div>
       </div>
 }
