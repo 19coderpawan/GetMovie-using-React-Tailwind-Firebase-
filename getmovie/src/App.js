@@ -6,13 +6,15 @@ import { Route, Routes } from "react-router-dom";
 import Login from "./Component/Login";
 import Signup from "./Component/Signup";
 import { createContext, useState } from "react";
+import "./App.css"
 
 const Appstate=createContext();
 function App() {
   const [login,Setlogin]=useState(false);
-
+  const [Search_query,Set_Search_query]=useState("");
+  // console.log(Search_query+"its my search query");
   return (
-    <Appstate.Provider value={{login, Setlogin}}>
+    <Appstate.Provider value={{login, Setlogin,Search_query,Set_Search_query}}>
     <div>
       <Header/>
       <Routes>
